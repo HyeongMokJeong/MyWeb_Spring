@@ -1,5 +1,6 @@
 package com.Myweb.hanbat.apicontroller;
 
+import com.Myweb.hanbat.annotation.RunningTime;
 import com.Myweb.hanbat.dto.CommentDto;
 import com.Myweb.hanbat.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ public class CommentApiController {
     @Autowired
     CommentService commentService;
 
-    @GetMapping("/comment/{id}")
+    @GetMapping("/api/comments/{id}")
     public ResponseEntity<CommentDto> getComment(@PathVariable Long id) {
-        CommentDto comment = commentService.getComment(id);
+        CommentDto comment = commentService.getCommentById(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(comment);
+        return (comment != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(comment) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

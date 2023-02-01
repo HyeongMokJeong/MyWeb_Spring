@@ -12,10 +12,11 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-    public CommentDto getComment(Long id) {
+    public CommentDto getCommentById(Long id) {
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("댓글 조회 실패 - 대상 댓글이 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("댓글 조회 실패 - 잘못된 id"));
 
-        return null;
+        CommentDto commentDto = CommentDto.createCommentDto(comment);
+        return commentDto;
     }
 }

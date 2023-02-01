@@ -1,5 +1,6 @@
 package com.Myweb.hanbat.dto;
 
+import com.Myweb.hanbat.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,15 @@ public class CommentDto {
     private String comment;
     private String link;
     private LocalDateTime data;
+
+    public static CommentDto createCommentDto(Comment comment) {
+        return new CommentDto(
+                comment.getId(),
+                comment.getNick(),
+                comment.getPassword(),
+                comment.getComment(),
+                comment.getLink(),
+                comment.getDate()
+        );
+    }
 }
